@@ -155,43 +155,45 @@ function CatalogPage({ onPageChange }) {
     });
   }, [selectedCategory, search, priceFrom, priceTo, inStock]);
 
+  const handleCategoryClick = useCallback((category) => {
+    if (category.isFilter) {
+      setShowFilters(true);
+    } else {
+      setSelectedCategory(category.id);
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#0D0D0D] text-white pb-24">
       <div className="max-w-2xl mx-auto p-6">
         {/* Header */}
         <div className="mb-10">
-          <h1 className="text-4xl font-bold mb-8 font-['Geist']">Каталог</h1>
+          <h1 className="text-4xl font-bold mb-8 font-['Geist']">INTURU</h1>
           
-          {/* Search and Filters */}
-          <div className="flex items-center gap-4 mb-8">
-            <div className="flex-1">
-              <input
-                type="text"
-                placeholder="Поиск товаров..."
-                value={search}
-                onChange={e => setSearch(e.target.value)}
-                className="w-full px-6 py-4 rounded-2xl bg-[#1A1A1A] text-white placeholder-[#A3A3A3] border border-[#2A2A2A] focus:outline-none focus:ring-2 focus:ring-[#C084FC] focus:border-[#C084FC] transition-all duration-300 text-lg"
-              />
-            </div>
-            <button
-              onClick={() => setShowFilters(true)}
-              className="flex items-center gap-3 bg-[#1A1A1A] hover:bg-[#C084FC] text-white px-6 py-4 rounded-2xl font-bold border border-[#2A2A2A] transition-all duration-300 shadow-md"
-            >
-              <BsFilter className="w-6 h-6" />
-              <span>Фильтры</span>
-            </button>
-            <button
-              onClick={() => onPageChange("cart")}
-              className="bg-[#C084FC] text-white py-4 px-6 rounded-2xl font-bold hover:bg-[#b26ef0] transition-all duration-300 shadow-lg shadow-[#C084FC]/40"
-            >
-              Корзина ({cartItems.length})
-            </button>
+          {/* Search */}
+          <div className="mb-8">
+            <input
+              type="text"
+              placeholder="Поиск товаров..."
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              className="w-full px-6 py-4 rounded-2xl bg-[#1A1A1A] text-white placeholder-[#A3A3A3] border border-[#2A2A2A] focus:outline-none focus:ring-2 focus:ring-[#C084FC] focus:border-[#C084FC] transition-all duration-300 text-lg"
+            />
           </div>
         </div>
 
         {/* Categories */}
         <div className="mb-10">
           <div className="flex gap-4 overflow-x-auto pb-4">
+            {/* Filters Button */}
+            <button
+              onClick={() => setShowFilters(true)}
+              className="w-12 h-12 bg-[#1A1A1A] text-[#A3A3A3] border border-[#2A2A2A] hover:text-white hover:bg-[#2A2A2A] rounded-2xl flex items-center justify-center transition-all duration-300"
+            >
+              <BsFilter className="w-6 h-6" />
+            </button>
+            
+            {/* Category Buttons */}
             {categories.map((category) => (
               <button
                 key={category.id}
