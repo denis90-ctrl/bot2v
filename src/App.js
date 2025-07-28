@@ -390,10 +390,47 @@ function ProfilePage() {
 
 function App() {
   const [page, setPage] = useState("catalog");
+  const [error, setError] = useState(null);
 
   const handlePageChange = useCallback((newPage) => {
     setPage(newPage);
   }, []);
+
+  // Обработка ошибок
+  React.useEffect(() => {
+    const handleError = (error) => {
+      console.error('App error:', error);
+      setError(error.message);
+    };
+
+    window.addEventListener('error', handleError);
+    window.addEventListener('unhandledrejection', (event) => {
+      handleError(new Error(event.reason));
+    });
+
+    return () => {
+      window.removeEventListener('error', handleError);
+      window.removeEventListener('unhandledrejection', handleError);
+    };
+  }, []);
+
+  // Если есть ошибка, показываем её
+  if (error) {
+    return (
+      <div className="min-h-screen bg-[#0D0D0D] text-white flex items-center justify-center p-6">
+        <div className="text-center">
+          <div className="text-2xl font-bold mb-4 text-[#C084FC]">Ошибка загрузки</div>
+          <div className="text-[#A3A3A3] mb-6">{error}</div>
+          <button 
+            onClick={() => window.location.reload()} 
+            className="bg-[#C084FC] text-white px-6 py-3 rounded-xl font-bold hover:bg-[#b26ef0] transition-all duration-300"
+          >
+            Перезагрузить
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-[#0D0D0D] text-white min-h-screen">

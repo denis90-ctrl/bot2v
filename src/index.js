@@ -31,21 +31,38 @@ try {
   };
 }
 
-// Инициализируем Telegram Web App
-if (tg.ready) {
-  tg.ready();
+// Функция инициализации приложения
+function initializeApp() {
+  // Инициализируем Telegram Web App
+  if (tg.ready) {
+    tg.ready();
+  }
+
+  // Настраиваем для мобильного отображения
+  if (tg.expand) {
+    tg.expand();
+  }
+
+  // Рендерим приложение
+  ReactDOM.render(
+    <React.StrictMode>
+      <CartProvider>
+        <App tg={tg} />
+      </CartProvider>
+    </React.StrictMode>,
+    document.getElementById("root")
+  );
 }
 
-// Настраиваем для мобильного отображения
-if (tg.expand) {
-  tg.expand();
+// Ждём загрузки DOM и Telegram
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeApp);
+} else {
+  // DOM уже загружен
+  initializeApp();
 }
 
-ReactDOM.render(
-  <React.StrictMode>
-    <CartProvider>
-      <App tg={tg} />
-    </CartProvider>
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+// Дополнительная проверка для Telegram
+if (window.Telegram?.WebApp) {
+  window.Telegram.WebApp.ready();
+}
