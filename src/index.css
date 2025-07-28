@@ -1,3 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  @apply bg-[#0D0D0D] text-white font-['Space_Grotesk'];
+}
+
+/* Анимации */
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}
+
+/* Улучшения для скроллбара */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: transparent;
+}
+
+/* Кастомные стили для фокуса */
+*:focus {
+  @apply outline-none ring-2 ring-[#C084FC] ring-opacity-50;
+}
+
+/* Улучшения для кнопок */
+button:active {
+  @apply transform scale-95;
+}
+
+/* Градиенты и эффекты */
+.gradient-bg {
+  background: linear-gradient(135deg, #C084FC 0%, #b26ef0 100%);
+}
+
+.glow {
+  box-shadow: 0 0 20px rgba(192, 132, 252, 0.3);
+}
