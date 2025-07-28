@@ -1,6 +1,10 @@
-import React from "react";
+import React, { memo, useCallback } from "react";
 
-function ProductCard({ product, onAddToCart }) {
+const ProductCard = memo(({ product, onAddToCart }) => {
+  const handleAddToCart = useCallback(() => {
+    onAddToCart(product);
+  }, [onAddToCart, product]);
+
   return (
     <div className="bg-[#1A1A1A] rounded-2xl shadow-lg border border-[#2A2A2A] overflow-hidden hover:shadow-xl hover:shadow-[#C084FC]/10 transition-all duration-300 group">
       {/* Image Container */}
@@ -28,7 +32,7 @@ function ProductCard({ product, onAddToCart }) {
         <div className="flex items-center justify-between">
           <span className="text-[#C084FC] font-bold text-2xl">{product.price} ₽</span>
           <button
-            onClick={() => onAddToCart(product)}
+            onClick={handleAddToCart}
             className="bg-[#C084FC] text-white py-3 px-6 rounded-xl font-bold hover:bg-[#b26ef0] transition-all duration-300 shadow-md shadow-[#C084FC]/30 hover:shadow-lg hover:shadow-[#C084FC]/40 text-lg"
           >
             В корзину
@@ -37,6 +41,8 @@ function ProductCard({ product, onAddToCart }) {
       </div>
     </div>
   );
-}
+});
+
+ProductCard.displayName = 'ProductCard';
 
 export default ProductCard; 
