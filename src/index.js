@@ -4,13 +4,42 @@ import App from "./App";
 import { CartProvider } from "./context/CartContext";
 import './index.css';
 
-// Безопасно инициализируем tg
-const tg = window.Telegram?.WebApp || {
-  initDataUnsafe: {},
-  ready: () => {},
-};
+// Инициализация Telegram Web App
+let tg;
+try {
+  // Пытаемся использовать официальный SDK
+  const { WebApp } = require('@twa-dev/sdk');
+  tg = WebApp;
+} catch (error) {
+  // Fallback для случая, когда SDK недоступен
+  tg = window.Telegram?.WebApp || {
+    initDataUnsafe: {},
+    ready: () => {},
+    expand: () => {},
+    close: () => {},
+    MainButton: {
+      show: () => {},
+      hide: () => {},
+      setText: () => {},
+      onClick: () => {},
+    },
+    BackButton: {
+      show: () => {},
+      hide: () => {},
+      onClick: () => {},
+    },
+  };
+}
 
-tg.ready();
+// Инициализируем Telegram Web App
+if (tg.ready) {
+  tg.ready();
+}
+
+// Настраиваем для мобильного отображения
+if (tg.expand) {
+  tg.expand();
+}
 
 ReactDOM.render(
   <React.StrictMode>
