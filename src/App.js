@@ -209,7 +209,7 @@ function CatalogPage({ onPageChange }) {
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-2 gap-4">
           {filteredProducts.map((product) => (
             <ProductCard key={product.id} product={product} onAddToCart={addToCart} />
           ))}

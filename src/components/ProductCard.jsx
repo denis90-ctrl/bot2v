@@ -26,14 +26,14 @@ const ProductCard = memo(({ product, onAddToCart }) => {
       </div>
       
       {/* Content */}
-      <div className="p-6">
-        <h3 className="font-bold text-xl text-white mb-4 group-hover:text-[#C084FC] transition-colors duration-300 line-clamp-2">{product.name}</h3>
+      <div className="p-4">
+        <h3 className="font-bold text-lg text-white mb-3 group-hover:text-[#C084FC] transition-colors duration-300 line-clamp-2 min-h-[3rem]">{product.name}</h3>
         
-        <div className="flex items-center justify-between">
-          <span className="text-[#C084FC] font-bold text-2xl">{product.price} ₽</span>
+        <div className="flex items-center justify-between gap-3">
+          <span className="text-[#C084FC] font-bold text-xl flex-shrink-0">{product.price} ₽</span>
           <button
             onClick={handleAddToCart}
-            className="bg-[#C084FC] text-white py-3 px-6 rounded-xl font-bold hover:bg-[#b26ef0] transition-all duration-300 shadow-md shadow-[#C084FC]/30 hover:shadow-lg hover:shadow-[#C084FC]/40 text-lg"
+            className="bg-[#C084FC] text-white py-2.5 px-4 rounded-xl font-bold hover:bg-[#b26ef0] transition-all duration-300 shadow-md shadow-[#C084FC]/30 hover:shadow-lg hover:shadow-[#C084FC]/40 text-sm whitespace-nowrap flex-shrink-0"
           >
             В корзину
           </button>
