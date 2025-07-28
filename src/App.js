@@ -135,7 +135,7 @@ function CatalogPage({ onPageChange }) {
   const [priceFrom, setPriceFrom] = useState("");
   const [priceTo, setPriceTo] = useState("");
   const [inStock, setInStock] = useState(false);
-  const { cartItems, addToCart } = useCart();
+  const { addToCart } = useCart();
 
   const categories = useMemo(() => [
     { id: "all", name: "Все" },
@@ -154,14 +154,6 @@ function CatalogPage({ onPageChange }) {
       return true;
     });
   }, [selectedCategory, search, priceFrom, priceTo, inStock]);
-
-  const handleCategoryClick = useCallback((category) => {
-    if (category.isFilter) {
-      setShowFilters(true);
-    } else {
-      setSelectedCategory(category.id);
-    }
-  }, []);
 
   return (
     <div className="min-h-screen bg-[#0D0D0D] text-white pb-24">
