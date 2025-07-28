@@ -5,14 +5,14 @@ import { CartProvider } from "./context/CartContext";
 import './index.css';
 
 // Инициализация Telegram Web App
-let tg;
-try {
-  // Пытаемся использовать официальный SDK
-  const { WebApp } = require('@twa-dev/sdk');
-  tg = WebApp;
-} catch (error) {
-  // Fallback для случая, когда SDK недоступен
-  tg = window.Telegram?.WebApp || {
+let tg = null;
+
+// Проверяем доступность Telegram Web App
+if (window.Telegram?.WebApp) {
+  tg = window.Telegram.WebApp;
+} else {
+  // Fallback для случая, когда Telegram API недоступен
+  tg = {
     initDataUnsafe: {},
     ready: () => {},
     expand: () => {},
@@ -33,14 +33,22 @@ try {
 
 // Функция инициализации приложения
 function initializeApp() {
-  // Инициализируем Telegram Web App
-  if (tg.ready) {
-    tg.ready();
+  // Инициализируем Telegram Web App с проверками
+  if (tg && typeof tg.ready === 'function') {
+    try {
+      tg.ready();
+    } catch (error) {
+      console.warn('Telegram WebApp ready() failed:', error);
+    }
   }
 
-  // Настраиваем для мобильного отображения
-  if (tg.expand) {
-    tg.expand();
+  // Настраиваем для мобильного отображения с проверками
+  if (tg && typeof tg.expand === 'function') {
+    try {
+      tg.expand();
+    } catch (error) {
+      console.warn('Telegram WebApp expand() failed:', error);
+    }
   }
 
   // Рендерим приложение
@@ -54,15 +62,9 @@ function initializeApp() {
   );
 }
 
-// Ждём загрузки DOM и Telegram
+// Запускаем инициализацию после загрузки DOM
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initializeApp);
 } else {
-  // DOM уже загружен
   initializeApp();
-}
-
-// Дополнительная проверка для Telegram
-if (window.Telegram?.WebApp) {
-  window.Telegram.WebApp.ready();
 }
