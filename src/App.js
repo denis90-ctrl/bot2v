@@ -396,6 +396,26 @@ function App() {
     setPage(newPage);
   }, []);
 
+  // Настройка внешнего вида Telegram Mini App
+  React.useEffect(() => {
+    if (window.Telegram?.WebApp) {
+      try {
+        // Устанавливаем цвет заголовка
+        window.Telegram.WebApp.setHeaderColor('#0D0D0D');
+        
+        // Устанавливаем цвет фона страницы
+        window.Telegram.WebApp.setBackgroundColor('#0E0E0E');
+        
+        // Расширяем приложение на весь экран
+        window.Telegram.WebApp.expand();
+        
+        console.log('Telegram WebApp appearance configured');
+      } catch (error) {
+        console.warn('Failed to configure Telegram WebApp appearance:', error);
+      }
+    }
+  }, []);
+
   // Обработка ошибок
   React.useEffect(() => {
     const handleError = (error) => {
@@ -433,7 +453,7 @@ function App() {
   }
 
   return (
-    <div className="bg-[#0D0D0D] text-white min-h-screen">
+    <div className="bg-[#0E0E0E] text-white min-h-screen">
       {page === "catalog" && <CatalogPage onPageChange={handlePageChange} />}
       {page === "cart" && <CartPage onPageChange={handlePageChange} />}
       {page === "profile" && <ProfilePage />}
