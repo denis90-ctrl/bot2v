@@ -47,15 +47,15 @@ body {
 /* Стили для скроллбара */
 ::-webkit-scrollbar {
   width: 0px;
-  background: transparent;
+  background: #0E0E0E;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: #0E0E0E;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: transparent;
+  background: #0E0E0E;
 }
 
 /* Анимации */

@@ -27,7 +27,7 @@ function BottomNav({ page, onPageChange }) {
                   : "text-[#A3A3A3] hover:text-white hover:bg-[#1A1A1A]"
               }`}
             >
-              <Icon className={`w-8 h-8 ${isActive ? "text-white" : ""}`} />
+              <Icon className={`w-6 h-6 ${isActive ? "text-white" : ""}`} />
               <span className={`text-sm mt-2 font-semibold ${isActive ? "font-bold" : ""}`}>
                 {item.label}
               </span>
