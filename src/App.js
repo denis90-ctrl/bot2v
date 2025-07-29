@@ -12,7 +12,7 @@ function BottomNav({ page, onPageChange }) {
   ], []);
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-[#0D0D0D] border-t border-[#1A1A1A] px-6 py-4 backdrop-blur-lg">
+    <div className="fixed bottom-0 left-0 right-0 bg-[#1A1A1A] border-t border-[#2A2A2A] px-6 py-3 backdrop-blur-lg">
       <div className="flex justify-around items-center max-w-md mx-auto">
         {navItems.map((item) => {
           const Icon = item.icon;
@@ -21,14 +21,14 @@ function BottomNav({ page, onPageChange }) {
             <button
               key={item.key}
               onClick={() => onPageChange(item.key)}
-              className={`flex flex-col items-center py-3 px-6 rounded-2xl transition-all duration-300 ${
+              className={`flex flex-col items-center py-2 px-4 rounded-2xl transition-all duration-300 ${
                 isActive
                   ? "bg-[#C084FC] text-white scale-110 shadow-lg shadow-[#C084FC]/40"
-                  : "text-[#A3A3A3] hover:text-white hover:bg-[#1A1A1A]"
+                  : "text-[#A3A3A3] hover:text-white hover:bg-[#2A2A2A]"
               }`}
             >
               <Icon className={`w-6 h-6 ${isActive ? "text-white" : ""}`} />
-              <span className={`text-sm mt-2 font-semibold ${isActive ? "font-bold" : ""}`}>
+              <span className={`text-xs mt-1 font-semibold ${isActive ? "font-bold" : ""}`}>
                 {item.label}
               </span>
             </button>
