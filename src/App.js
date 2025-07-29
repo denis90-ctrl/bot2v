@@ -409,6 +409,17 @@ function App() {
         // Расширяем приложение на весь экран
         window.Telegram.WebApp.expand();
         
+        // Устанавливаем тему приложения
+        window.Telegram.WebApp.setThemeParams({
+          bg_color: '#0E0E0E',
+          text_color: '#FFFFFF',
+          hint_color: '#A3A3A3',
+          link_color: '#C084FC',
+          button_color: '#C084FC',
+          button_text_color: '#FFFFFF',
+          secondary_bg_color: '#1A1A1A'
+        });
+        
         console.log('Telegram WebApp appearance configured');
       } catch (error) {
         console.warn('Failed to configure Telegram WebApp appearance:', error);

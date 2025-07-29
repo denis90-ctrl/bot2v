@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { CartProvider } from "./context/CartContext";
 import './index.css';
+import { register as registerServiceWorker } from './serviceWorkerRegistration';
 
 // Инициализация Telegram Web App
 let tg = null;
@@ -64,7 +65,11 @@ function initializeApp() {
 
 // Запускаем инициализацию после загрузки DOM
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initializeApp);
+  document.addEventListener('DOMContentLoaded', () => {
+    initializeApp();
+    registerServiceWorker();
+  });
 } else {
   initializeApp();
+  registerServiceWorker();
 }
