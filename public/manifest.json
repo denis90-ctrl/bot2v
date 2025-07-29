@@ -1,7 +1,7 @@
 {
   "short_name": "INTURU",
-  "name": "IN2RU SHOP",
-  "description": "Современный магазин в Telegram Mini App и как PWA",
+  "name": "INTURU Shop",
+  "description": "Магазин товаров",
   "icons": [
     {
       "src": "favicon.ico",
@@ -11,23 +11,16 @@
     {
       "src": "logo192.png",
       "type": "image/png",
-      "sizes": "192x192",
-      "purpose": "any maskable"
+      "sizes": "192x192"
     },
     {
       "src": "logo512.png",
       "type": "image/png",
-      "sizes": "512x512",
-      "purpose": "any maskable"
+      "sizes": "512x512"
     }
   ],
-  "start_url": "/",
+  "start_url": ".",
   "display": "standalone",
   "background_color": "#0E0E0E",
-  "theme_color": "#C084FC",
-  "orientation": "portrait-primary",
-  "scope": "/",
-  "lang": "ru",
-  "categories": ["shopping", "lifestyle"],
-  "prefer_related_applications": false
+  "theme_color": "#C084FC"
 }

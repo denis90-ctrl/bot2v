@@ -67,9 +67,25 @@ function initializeApp() {
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     initializeApp();
-    registerServiceWorker();
+    // Регистрируем service worker с отладочной информацией
+    registerServiceWorker({
+      onSuccess: (registration) => {
+        console.log('Service Worker registered successfully:', registration);
+      },
+      onUpdate: (registration) => {
+        console.log('Service Worker updated:', registration);
+      }
+    });
   });
 } else {
   initializeApp();
-  registerServiceWorker();
+  // Регистрируем service worker с отладочной информацией
+  registerServiceWorker({
+    onSuccess: (registration) => {
+      console.log('Service Worker registered successfully:', registration);
+    },
+    onUpdate: (registration) => {
+      console.log('Service Worker updated:', registration);
+    }
+  });
 }

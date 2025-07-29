@@ -12,42 +12,14 @@
     />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="format-detection" content="telephone=no" />
     <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="msapplication-tap-highlight" content="no" />
-    <meta name="application-name" content="INTURU Shop" />
-    <meta name="apple-mobile-web-app-title" content="INTURU Shop" />
-    <meta name="msapplication-TileColor" content="#C084FC" />
-    <meta name="msapplication-config" content="%PUBLIC_URL%/browserconfig.xml" />
     
     <!-- PWA Icons -->
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon.ico" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" crossorigin="use-credentials" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     
     <!-- Telegram Web App Script -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    
-    <!-- Дополнительные скрипты для совместимости -->
-    <script>
-      // Предотвращаем зум на мобильных устройствах
-      document.addEventListener('touchstart', function(event) {
-        if (event.touches.length > 1) {
-          event.preventDefault();
-        }
-      }, { passive: false });
-      
-      // Предотвращаем двойной тап для зума
-      let lastTouchEnd = 0;
-      document.addEventListener('touchend', function(event) {
-        const now = (new Date()).getTime();
-        if (now - lastTouchEnd <= 300) {
-          event.preventDefault();
-        }
-        lastTouchEnd = now;
-      }, false);
-    </script>
     
     <title>INTURU Shop</title>
   </head>
