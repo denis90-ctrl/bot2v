@@ -1,14 +1,23 @@
-﻿import React, { memo, useCallback, useState } from "react";
+﻿import React, { memo, useCallback, useEffect, useRef, useState } from "react";
 
 const ProductCard = memo(({ product, onAddToCart }) => {
   const [isInCart, setIsInCart] = useState(false);
+  const resetTimerRef = useRef(null);
+
+  useEffect(() => {
+    return () => {
+      if (resetTimerRef.current) {
+        clearTimeout(resetTimerRef.current);
+      }
+    };
+  }, []);
 
   const handleAddToCart = useCallback(() => {
     onAddToCart(product);
     setIsInCart(true);
     
     // Сброс состояния через 2 секунды для возможности повторного добавления
-    setTimeout(() => {
+    if (resetTimerRef.current) {`r`n      clearTimeout(resetTimerRef.current);`r`n    }`r`n    resetTimerRef.current = setTimeout(() => {
       setIsInCart(false);
     }, 2000);
   }, [onAddToCart, product]);
@@ -66,3 +75,4 @@ const ProductCard = memo(({ product, onAddToCart }) => {
 ProductCard.displayName = 'ProductCard';
 
 export default ProductCard; 
+
