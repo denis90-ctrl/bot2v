@@ -17,7 +17,10 @@ const ProductCard = memo(({ product, onAddToCart }) => {
     setIsInCart(true);
     
     // Сброс состояния через 2 секунды для возможности повторного добавления
-    if (resetTimerRef.current) {`r`n      clearTimeout(resetTimerRef.current);`r`n    }`r`n    resetTimerRef.current = setTimeout(() => {
+    if (resetTimerRef.current) {
+      clearTimeout(resetTimerRef.current);
+    }
+    resetTimerRef.current = setTimeout(() => {
       setIsInCart(false);
     }, 2000);
   }, [onAddToCart, product]);
@@ -30,6 +33,8 @@ const ProductCard = memo(({ product, onAddToCart }) => {
           <img
             src={product.image}
             alt={product.name}
+            loading="lazy"
+            decoding="async"
             className="w-auto h-auto max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300"
             style={{ 
               maxWidth: '80%', 

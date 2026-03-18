@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import App from "./App";
 import { CartProvider } from "./context/CartContext";
 import './index.css';
@@ -53,13 +53,13 @@ function initializeApp() {
   }
 
   // Рендерим приложение
-  ReactDOM.render(
+  const root = createRoot(document.getElementById("root"));
+  root.render(
     <React.StrictMode>
       <CartProvider>
         <App tg={tg} />
       </CartProvider>
     </React.StrictMode>,
-    document.getElementById("root")
   );
 }
 
