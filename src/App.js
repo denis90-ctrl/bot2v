@@ -80,7 +80,7 @@ function CartPage({ onPageChange }) {
           <div className="space-y-6">
             {groupedItems.map((item) => (
               <div key={item.id} className="bg-[#1A1A1A] rounded-2xl shadow-lg p-6 border border-[#2A2A2A] hover:shadow-xl transition-all duration-300">
-                <div className="flex items-center gap-6">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
                   <div className="w-20 h-20 bg-[#2A2A2A] rounded-2xl flex items-center justify-center">
                     {item.image ? (
                       <img src={item.image} alt={item.name} className="w-16 h-16 object-contain" />
@@ -88,11 +88,11 @@ function CartPage({ onPageChange }) {
                       <div className="text-[#A3A3A3] text-sm text-center">Нет изображения</div>
                     )}
                   </div>
-                  <div className="flex-1">
+                  <div className="w-full sm:flex-1">
                     <div className="font-bold text-xl text-white mb-2">{item.name}</div>
                     <div className="text-[#EF4444] font-bold text-2xl">{item.price} ₽</div>
                   </div>
-                  <div className="flex items-center gap-4">
+                  <div className="w-full sm:w-auto flex items-center justify-between sm:justify-start gap-4">
                     <button
                       onClick={() => decrease(item.id)}
                       className="w-12 h-12 bg-[#2A2A2A] text-white rounded-xl hover:bg-[#3A3A3A] transition-all duration-300 shadow-md text-xl font-bold"
@@ -116,12 +116,63 @@ function CartPage({ onPageChange }) {
                 <span className="text-white">Итого:</span>
                 <span className="text-[#EF4444]">{totalSum} ₽</span>
               </div>
-              <button className="w-full bg-[#EF4444] text-white py-5 rounded-2xl font-bold hover:bg-[#DC2626] transition-all duration-300 shadow-lg shadow-[#EF4444]/40 text-xl">
+              <button
+                onClick={() => onPageChange("checkout")}
+                className="w-full bg-[#EF4444] text-white py-5 rounded-2xl font-bold hover:bg-[#DC2626] transition-all duration-300 shadow-lg shadow-[#EF4444]/40 text-xl"
+              >
                 Оформить заказ
               </button>
             </div>
           </div>
         )}
+      </div>
+    </div>
+  );
+}
+
+// Отдельный компонент для оформления заказа
+function CheckoutPage({ onPageChange }) {
+  const { cartItems, clearCart } = useCart();
+  const totalSum = useMemo(() => cartItems.reduce((sum, item) => sum + item.price, 0), [cartItems]);
+
+  const handleSubmit = () => {
+    if (!cartItems.length) {
+      if (window.Telegram?.WebApp?.showAlert) {
+        window.Telegram.WebApp.showAlert("Корзина пуста");
+      } else {
+        alert("Корзина пуста");
+      }
+      return;
+    }
+    clearCart();
+    if (window.Telegram?.WebApp?.showAlert) {
+      window.Telegram.WebApp.showAlert("Заказ оформлен! Мы свяжемся с вами.");
+    } else {
+      alert("Заказ оформлен! Мы свяжемся с вами.");
+    }
+    onPageChange("catalog");
+  };
+
+  return (
+    <div className="min-h-screen bg-[#0D0D0D] text-white pb-24">
+      <div className="max-w-2xl mx-auto p-6">
+        <h1 className="text-4xl font-bold mb-8 text-center font-['Geist']">Оформление заказа</h1>
+        <div className="bg-[#1A1A1A] rounded-2xl shadow-lg p-6 border border-[#2A2A2A] mb-6">
+          <div className="text-lg text-[#A3A3A3] mb-3">Сумма заказа</div>
+          <div className="text-3xl font-bold text-[#EF4444]">{totalSum} ₽</div>
+        </div>
+        <button
+          onClick={handleSubmit}
+          className="w-full bg-[#EF4444] text-white py-5 rounded-2xl font-bold hover:bg-[#DC2626] transition-all duration-300 shadow-lg shadow-[#EF4444]/40 text-xl"
+        >
+          Подтвердить заказ
+        </button>
+        <button
+          onClick={() => onPageChange("cart")}
+          className="w-full mt-4 bg-[#2A2A2A] text-[#A3A3A3] py-4 rounded-2xl font-bold hover:bg-[#3A3A3A] hover:text-white transition-all duration-300 border border-[#3A3A3A]"
+        >
+          Назад в корзину
+        </button>
       </div>
     </div>
   );
@@ -467,6 +518,7 @@ function App() {
     <div className="bg-[#0E0E0E] text-white min-h-screen">
       {page === "catalog" && <CatalogPage onPageChange={handlePageChange} />}
       {page === "cart" && <CartPage onPageChange={handlePageChange} />}
+      {page === "checkout" && <CheckoutPage onPageChange={handlePageChange} />}
       {page === "profile" && <ProfilePage />}
       
       <BottomNav page={page} onPageChange={handlePageChange} />
