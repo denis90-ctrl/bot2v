@@ -1,48 +1,37 @@
 {
-  "name": "bot2v",
-  "version": "0.1.0",
-  "private": true,
+  "name": "telegram-bot-admin",
+  "version": "1.0.0",
+  "description": "Telegram Bot Admin Interface",
   "homepage": "https://denis90-ctrl.github.io/bot2v",
-  "dependencies": {
-    "@twa-dev/sdk": "^8.0.2",
-    "@vkontakte/vk-bridge": "^2.6.2",
-    "@vkontakte/vkui": "^5.6.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-icons": "^5.5.0",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
-  },
-  "devDependencies": {
-    "autoprefixer": "^10.4.21",
-    "gh-pages": "^5.0.0",
-    "postcss": "^8.5.6",
-    "tailwindcss": "^3.4.3"
-  },
   "scripts": {
+    "install:backend": "cd backend && npm install",
+    "install:admin": "cd admin && npm install",
+    "install:all": "npm run install:backend && npm run install:admin",
+    "start:backend": "cd backend && npm start",
+    "start:admin": "cd admin && npm start",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:admin": "cd admin && npm start",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:admin\"",
+    "build:admin": "cd admin && npm run build",
+    "setup-webhook": "node scripts/setup-webhook.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.12.0",
+    "react-scripts": "5.0.1"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "concurrently": "^8.2.0",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.10"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }

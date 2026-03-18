@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from "react";
+﻿import React, { useState, useMemo, useCallback } from "react";
 import { useCart } from "./context/CartContext";
 import ProductCard from "./components/ProductCard";
 import { BsHouse, BsCart, BsPerson, BsFilter } from "react-icons/bs";
@@ -23,7 +23,7 @@ function BottomNav({ page, onPageChange }) {
               onClick={() => onPageChange(item.key)}
               className={`flex flex-col items-center py-2 px-4 rounded-2xl transition-all duration-300 ${
                 isActive
-                  ? "bg-[#C084FC] text-white scale-110 shadow-lg shadow-[#C084FC]/40"
+                  ? "bg-[#EF4444] text-white scale-110 shadow-lg shadow-[#EF4444]/40"
                   : "text-[#A3A3A3] hover:text-white hover:bg-[#2A2A2A]"
               }`}
             >
@@ -71,7 +71,7 @@ function CartPage({ onPageChange }) {
             <div className="text-[#A3A3A3] text-2xl mb-8 font-medium">Корзина пуста</div>
             <button
               onClick={() => onPageChange("catalog")}
-              className="bg-[#C084FC] text-white py-5 px-10 rounded-2xl font-bold hover:bg-[#b26ef0] transition-all duration-300 shadow-lg shadow-[#C084FC]/40 text-lg"
+              className="bg-[#EF4444] text-white py-5 px-10 rounded-2xl font-bold hover:bg-[#DC2626] transition-all duration-300 shadow-lg shadow-[#EF4444]/40 text-lg"
             >
               Перейти к покупкам
             </button>
@@ -90,7 +90,7 @@ function CartPage({ onPageChange }) {
                   </div>
                   <div className="flex-1">
                     <div className="font-bold text-xl text-white mb-2">{item.name}</div>
-                    <div className="text-[#C084FC] font-bold text-2xl">{item.price} ₽</div>
+                    <div className="text-[#EF4444] font-bold text-2xl">{item.price} ₽</div>
                   </div>
                   <div className="flex items-center gap-4">
                     <button
@@ -102,7 +102,7 @@ function CartPage({ onPageChange }) {
                     <span className="w-12 text-center font-bold text-xl">{item.quantity}</span>
                     <button
                       onClick={() => increase(item.id)}
-                      className="w-12 h-12 bg-[#C084FC] text-white rounded-xl hover:bg-[#b26ef0] transition-all duration-300 shadow-md shadow-[#C084FC]/30 text-xl font-bold"
+                      className="w-12 h-12 bg-[#EF4444] text-white rounded-xl hover:bg-[#DC2626] transition-all duration-300 shadow-md shadow-[#EF4444]/30 text-xl font-bold"
                     >
                       +
                     </button>
@@ -114,9 +114,9 @@ function CartPage({ onPageChange }) {
             <div className="bg-[#1A1A1A] rounded-2xl shadow-lg p-8 border border-[#2A2A2A]">
               <div className="flex justify-between items-center text-3xl font-bold mb-6">
                 <span className="text-white">Итого:</span>
-                <span className="text-[#C084FC]">{totalSum} ₽</span>
+                <span className="text-[#EF4444]">{totalSum} ₽</span>
               </div>
-              <button className="w-full bg-[#C084FC] text-white py-5 rounded-2xl font-bold hover:bg-[#b26ef0] transition-all duration-300 shadow-lg shadow-[#C084FC]/40 text-xl">
+              <button className="w-full bg-[#EF4444] text-white py-5 rounded-2xl font-bold hover:bg-[#DC2626] transition-all duration-300 shadow-lg shadow-[#EF4444]/40 text-xl">
                 Оформить заказ
               </button>
             </div>
@@ -169,7 +169,7 @@ function CatalogPage({ onPageChange }) {
               placeholder="Поиск товаров..."
               value={search}
               onChange={e => setSearch(e.target.value)}
-              className="w-full px-6 py-4 rounded-2xl bg-[#1A1A1A] text-white placeholder-[#A3A3A3] border border-[#2A2A2A] focus:outline-none focus:ring-2 focus:ring-[#C084FC] focus:border-[#C084FC] transition-all duration-300 text-lg"
+              className="w-full px-6 py-4 rounded-2xl bg-[#1A1A1A] text-white placeholder-[#A3A3A3] border border-[#2A2A2A] focus:outline-none focus:ring-2 focus:ring-[#EF4444] focus:border-[#EF4444] transition-all duration-300 text-lg"
             />
           </div>
         </div>
@@ -192,7 +192,7 @@ function CatalogPage({ onPageChange }) {
                 onClick={() => setSelectedCategory(category.id)}
                 className={`px-8 py-4 rounded-2xl font-bold whitespace-nowrap transition-all duration-300 text-lg ${
                   selectedCategory === category.id
-                    ? "bg-[#C084FC] text-white shadow-lg shadow-[#C084FC]/40"
+                    ? "bg-[#EF4444] text-white shadow-lg shadow-[#EF4444]/40"
                     : "bg-[#1A1A1A] text-[#A3A3A3] border border-[#2A2A2A] hover:text-white hover:bg-[#2A2A2A]"
                 }`}
               >
@@ -212,7 +212,7 @@ function CatalogPage({ onPageChange }) {
         {/* Filters Modal */}
         {showFilters && (
           <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 backdrop-blur-sm" onClick={() => setShowFilters(false)}>
-            <div className="w-full max-w-md bg-[#1A1A1A] rounded-t-3xl p-8 shadow-2xl border-t-4 border-[#C084FC] animate-slide-up" onClick={e => e.stopPropagation()}>
+            <div className="w-full max-w-md bg-[#1A1A1A] rounded-t-3xl p-8 shadow-2xl border-t-4 border-[#EF4444] animate-slide-up" onClick={e => e.stopPropagation()}>
               <div className="flex justify-between items-center mb-8">
                 <div className="text-3xl font-bold font-['Geist']">Фильтры</div>
                 <button onClick={() => setShowFilters(false)} className="text-[#A3A3A3] hover:text-white text-3xl transition-colors">×</button>
@@ -228,7 +228,7 @@ function CatalogPage({ onPageChange }) {
                         onClick={() => setSelectedCategory(category.id)}
                         className={`px-6 py-3 rounded-xl font-bold whitespace-nowrap transition-all duration-300 ${
                           selectedCategory === category.id
-                            ? "bg-[#C084FC] text-white shadow-md shadow-[#C084FC]/30"
+                            ? "bg-[#EF4444] text-white shadow-md shadow-[#EF4444]/30"
                             : "bg-[#2A2A2A] text-[#A3A3A3] border border-[#3A3A3A] hover:text-white"
                         }`}
                       >
@@ -245,7 +245,7 @@ function CatalogPage({ onPageChange }) {
                       type="number"
                       value={priceFrom}
                       onChange={e => setPriceFrom(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl bg-[#2A2A2A] text-white border border-[#3A3A3A] focus:outline-none focus:ring-2 focus:ring-[#C084FC] transition-all duration-300"
+                      className="w-full px-4 py-3 rounded-xl bg-[#2A2A2A] text-white border border-[#3A3A3A] focus:outline-none focus:ring-2 focus:ring-[#EF4444] transition-all duration-300"
                     />
                   </div>
                   <div className="flex-1">
@@ -254,7 +254,7 @@ function CatalogPage({ onPageChange }) {
                       type="number"
                       value={priceTo}
                       onChange={e => setPriceTo(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl bg-[#2A2A2A] text-white border border-[#3A3A3A] focus:outline-none focus:ring-2 focus:ring-[#C084FC] transition-all duration-300"
+                      className="w-full px-4 py-3 rounded-xl bg-[#2A2A2A] text-white border border-[#3A3A3A] focus:outline-none focus:ring-2 focus:ring-[#EF4444] transition-all duration-300"
                     />
                   </div>
                 </div>
@@ -265,7 +265,7 @@ function CatalogPage({ onPageChange }) {
                       type="checkbox"
                       checked={inStock}
                       onChange={() => setInStock(v => !v)}
-                      className="accent-[#C084FC] w-6 h-6"
+                      className="accent-[#EF4444] w-6 h-6"
                     />
                     <span className="text-[#A3A3A3] font-semibold text-lg">Только в наличии</span>
                   </label>
@@ -273,7 +273,7 @@ function CatalogPage({ onPageChange }) {
                 
                 <button
                   onClick={() => setShowFilters(false)}
-                  className="w-full bg-[#C084FC] text-white py-5 rounded-2xl font-bold hover:bg-[#b26ef0] transition-all duration-300 shadow-lg shadow-[#C084FC]/40 text-xl"
+                  className="w-full bg-[#EF4444] text-white py-5 rounded-2xl font-bold hover:bg-[#DC2626] transition-all duration-300 shadow-lg shadow-[#EF4444]/40 text-xl"
                 >
                   Применить
                 </button>
@@ -369,17 +369,17 @@ function ProfilePage() {
         {/* Sections */}
         <div className="space-y-6">
           <div className="bg-[#1A1A1A] rounded-2xl shadow-lg p-8 border border-[#2A2A2A]">
-            <h2 className="text-2xl font-bold mb-4 text-[#C084FC] font-['Geist']">Привязанные карты</h2>
+            <h2 className="text-2xl font-bold mb-4 text-[#EF4444] font-['Geist']">Привязанные карты</h2>
             <div className="text-[#A3A3A3] text-lg">Пока нет привязанных карт</div>
           </div>
 
           <div className="bg-[#1A1A1A] rounded-2xl shadow-lg p-8 border border-[#2A2A2A]">
-            <h2 className="text-2xl font-bold mb-4 text-[#C084FC] font-['Geist']">Криптокошельки</h2>
+            <h2 className="text-2xl font-bold mb-4 text-[#EF4444] font-['Geist']">Криптокошельки</h2>
             <div className="text-[#A3A3A3] text-lg">Пока нет привязанных кошельков</div>
           </div>
 
           <div className="bg-[#1A1A1A] rounded-2xl shadow-lg p-8 border border-[#2A2A2A]">
-            <h2 className="text-2xl font-bold mb-4 text-[#C084FC] font-['Geist']">История заказов</h2>
+            <h2 className="text-2xl font-bold mb-4 text-[#EF4444] font-['Geist']">История заказов</h2>
             <div className="text-[#A3A3A3] text-lg">Пока нет заказов</div>
           </div>
         </div>
@@ -414,8 +414,8 @@ function App() {
           bg_color: '#0E0E0E',
           text_color: '#FFFFFF',
           hint_color: '#A3A3A3',
-          link_color: '#C084FC',
-          button_color: '#C084FC',
+          link_color: '#EF4444',
+          button_color: '#EF4444',
           button_text_color: '#FFFFFF',
           secondary_bg_color: '#1A1A1A'
         });
@@ -450,11 +450,11 @@ function App() {
     return (
       <div className="min-h-screen bg-[#0D0D0D] text-white flex items-center justify-center p-6">
         <div className="text-center">
-          <div className="text-2xl font-bold mb-4 text-[#C084FC]">Ошибка загрузки</div>
+          <div className="text-2xl font-bold mb-4 text-[#EF4444]">Ошибка загрузки</div>
           <div className="text-[#A3A3A3] mb-6">{error}</div>
           <button 
             onClick={() => window.location.reload()} 
-            className="bg-[#C084FC] text-white px-6 py-3 rounded-xl font-bold hover:bg-[#b26ef0] transition-all duration-300"
+            className="bg-[#EF4444] text-white px-6 py-3 rounded-xl font-bold hover:bg-[#DC2626] transition-all duration-300"
           >
             Перезагрузить
           </button>
@@ -506,3 +506,4 @@ const products = [
 ];
 
 export default App;
+
