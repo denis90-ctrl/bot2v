@@ -1,4 +1,4 @@
-name: Deploy Pages
+﻿name: Deploy Pages
 
 on:
   push:
@@ -32,6 +32,8 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          CI: false
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
@@ -48,3 +50,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
