@@ -219,10 +219,10 @@ function CatalogPage({ onPageChange }) {
           <div className="mb-8">
             <input
               type="text"
-              placeholder="Поиск товаров..."
+              placeholder="Поиск..."
               value={search}
               onChange={e => setSearch(e.target.value)}
-              className="w-full px-6 py-4 rounded-2xl bg-[#1A1A1A] text-white placeholder-[#A3A3A3] border border-[#2A2A2A] focus:outline-none focus:ring-2 focus:ring-[#EF4444] focus:border-[#EF4444] transition-all duration-300 text-lg"
+              className="w-full max-w-[66%] mx-auto px-6 py-4 rounded-2xl bg-[#1A1A1A] text-white placeholder-[#A3A3A3] border border-[#2A2A2A] focus:outline-none focus:ring-2 focus:ring-[#EF4444] focus:border-[#EF4444] transition-all duration-300 text-lg"
             />
           </div>
         </div>
