@@ -191,9 +191,8 @@ function CatalogPage({ onPageChange }) {
 
   const categories = useMemo(() => [
     { id: "all", name: "Все" },
-    { id: "electronics", name: "Электроника" },
-    { id: "clothing", name: "Одежда" },
-    { id: "accessories", name: "Аксессуары" },
+    { id: "info", name: "Инфо" },
+    { id: "physical", name: "Физика" },
   ], []);
 
   const filteredProducts = useMemo(() => {
@@ -235,6 +234,15 @@ function CatalogPage({ onPageChange }) {
                 className="w-full pl-12 pr-5 py-2.5 rounded-2xl bg-[#1A1A1A] text-white placeholder-[#A3A3A3] border border-[#2A2A2A] focus:outline-none focus:ring-2 focus:ring-[#EF4444] focus:border-[#EF4444] transition-all duration-300 text-base"
               />
             </div>
+          </div>
+
+          <div className="mb-8 flex justify-center">
+            <button
+              onClick={() => setSelectedCategory("info")}
+              className="bg-[#EF4444] text-white py-3 px-6 rounded-2xl font-bold hover:bg-[#DC2626] transition-all duration-300 shadow-lg shadow-[#EF4444]/40 text-base"
+            >
+              Получить доступ к видео
+            </button>
           </div>
         </div>
 
@@ -542,30 +550,51 @@ function App() {
 const products = [
   {
     id: 1,
-    name: "Футболка",
-    price: 1500,
-    category: "clothing",
-    image: require("./assets/tshirt.png"),
-  },
-  {
-    id: 2,
-    name: "Наушники",
-    price: 2500,
-    category: "electronics",
+    name: "Подписка 1 месяц",
+    price: 199,
+    category: "info",
     image: require("./assets/headphones.png"),
   },
   {
-    id: 3,
-    name: "Браслет",
-    price: 800,
-    category: "accessories",
+    id: 2,
+    name: "Подписка 3 месяца",
+    price: null,
+    category: "info",
     image: require("./assets/bracelet.png"),
   },
   {
+    id: 3,
+    name: "Подписка 12 месяцев",
+    price: null,
+    category: "info",
+    image: require("./assets/jacket.png"),
+  },
+  {
     id: 4,
-    name: "Куртка",
-    price: 3500,
-    category: "clothing",
+    name: "Шорты",
+    price: null,
+    category: "physical",
+    image: require("./assets/tshirt.png"),
+  },
+  {
+    id: 5,
+    name: "Рашгард",
+    price: null,
+    category: "physical",
+    image: require("./assets/headphones.png"),
+  },
+  {
+    id: 6,
+    name: "Леггинсы",
+    price: null,
+    category: "physical",
+    image: require("./assets/bracelet.png"),
+  },
+  {
+    id: 7,
+    name: "Полный комплект",
+    price: null,
+    category: "physical",
     image: require("./assets/jacket.png"),
   },
 ];

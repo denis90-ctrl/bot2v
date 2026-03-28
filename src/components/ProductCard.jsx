@@ -57,20 +57,23 @@ const ProductCard = memo(({ product, onAddToCart }) => {
           {product.name}
         </h3>
         <span className="text-[#EF4444] font-bold text-lg text-center mb-2">
-          {product.price} ₽
+          {Number.isFinite(product.price) && product.price > 0 ? `${product.price} ₽` : "Скоро"}
         </span>
       </div>
       {/* Кнопка внизу */}
       <div className="px-3 pb-3">
         <button
           onClick={handleAddToCart}
+          disabled={!Number.isFinite(product.price) || product.price <= 0}
           className={`w-full h-8 rounded-lg font-bold transition-all duration-300 text-sm ${
-            isInCart
-              ? 'bg-green-500 text-white shadow-md shadow-green-500/30'
-              : 'bg-[#EF4444] text-white hover:bg-[#DC2626] shadow-md shadow-[#EF4444]/30 hover:shadow-lg hover:shadow-[#EF4444]/40'
+            !Number.isFinite(product.price) || product.price <= 0
+              ? 'bg-[#2A2A2A] text-[#A3A3A3] cursor-not-allowed'
+              : isInCart
+                ? 'bg-green-500 text-white shadow-md shadow-green-500/30'
+                : 'bg-[#EF4444] text-white hover:bg-[#DC2626] shadow-md shadow-[#EF4444]/30 hover:shadow-lg hover:shadow-[#EF4444]/40'
           }`}
         >
-          {isInCart ? 'В корзине' : 'В корзину'}
+          {!Number.isFinite(product.price) || product.price <= 0 ? 'Скоро' : (isInCart ? 'В корзине' : 'В корзину')}
         </button>
       </div>
     </div>
