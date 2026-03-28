@@ -182,6 +182,7 @@ function CheckoutPage({ onPageChange }) {
 function CatalogPage({ onPageChange }) {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [search, setSearch] = useState("");
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
   const [priceFrom, setPriceFrom] = useState("");
   const [priceTo, setPriceTo] = useState("");
@@ -226,9 +227,11 @@ function CatalogPage({ onPageChange }) {
               </span>
               <input
                 type="text"
-                placeholder="Search"
+                placeholder={isSearchFocused ? "" : "Search"}
                 value={search}
                 onChange={e => setSearch(e.target.value)}
+                onFocus={() => setIsSearchFocused(true)}
+                onBlur={() => setIsSearchFocused(false)}
                 className="w-full pl-12 pr-5 py-2.5 rounded-2xl bg-[#1A1A1A] text-white placeholder-[#A3A3A3] border border-[#2A2A2A] focus:outline-none focus:ring-2 focus:ring-[#EF4444] focus:border-[#EF4444] transition-all duration-300 text-base"
               />
             </div>
