@@ -214,7 +214,6 @@ function CatalogPage({ onPageChange }) {
           <div className="text-center text-sm font-semibold tracking-[0.3em] text-white/80 mb-6">
             ADAEV SHOP
           </div>
-          <h1 className="text-4xl font-bold mb-8 font-['Geist']">ADAEV</h1>
           
           {/* Search */}
           <div className="mb-8">
