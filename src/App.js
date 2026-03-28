@@ -217,13 +217,21 @@ function CatalogPage({ onPageChange }) {
           
           {/* Search */}
           <div className="mb-8">
-            <input
-              type="text"
-              placeholder="Поиск..."
-              value={search}
-              onChange={e => setSearch(e.target.value)}
-              className="w-full max-w-[66%] mx-auto px-6 py-4 rounded-2xl bg-[#1A1A1A] text-white placeholder-[#A3A3A3] border border-[#2A2A2A] focus:outline-none focus:ring-2 focus:ring-[#EF4444] focus:border-[#EF4444] transition-all duration-300 text-lg"
-            />
+            <div className="relative w-full max-w-[66%] mx-auto">
+              <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#A3A3A3]">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="2" />
+                  <path d="M20 20L17 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                </svg>
+              </span>
+              <input
+                type="text"
+                placeholder="Search"
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+                className="w-full pl-12 pr-5 py-2.5 rounded-2xl bg-[#1A1A1A] text-white placeholder-[#A3A3A3] border border-[#2A2A2A] focus:outline-none focus:ring-2 focus:ring-[#EF4444] focus:border-[#EF4444] transition-all duration-300 text-base"
+              />
+            </div>
           </div>
         </div>
 
