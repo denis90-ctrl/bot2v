@@ -246,33 +246,7 @@ function CatalogPage({ onPageChange }) {
           </div>
         </div>
 
-        {/* Categories */}
-        <div className="mb-10">
-          <div className="flex gap-4 overflow-x-auto pb-4">
-            {/* Filters Button */}
-            <button
-              onClick={() => setShowFilters(true)}
-              className="w-12 h-12 bg-[#1A1A1A] text-[#A3A3A3] border border-[#2A2A2A] hover:text-white hover:bg-[#2A2A2A] rounded-2xl flex items-center justify-center transition-all duration-300"
-            >
-              <BsFilter className="w-6 h-6" />
-            </button>
-            
-            {/* Category Buttons */}
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => setSelectedCategory(category.id)}
-                className={`px-8 py-4 rounded-2xl font-bold whitespace-nowrap transition-all duration-300 text-lg ${
-                  selectedCategory === category.id
-                    ? "bg-[#EF4444] text-white shadow-lg shadow-[#EF4444]/40"
-                    : "bg-[#1A1A1A] text-[#A3A3A3] border border-[#2A2A2A] hover:text-white hover:bg-[#2A2A2A]"
-                }`}
-              >
-                {category.name}
-              </button>
-            ))}
-          </div>
-        </div>
+        {/* Categories скрыты для общего доступа */}
 
         {/* Products Grid */}
         <div className="grid grid-cols-2 gap-4">
@@ -281,78 +255,7 @@ function CatalogPage({ onPageChange }) {
           ))}
         </div>
 
-        {/* Filters Modal */}
-        {showFilters && (
-          <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 backdrop-blur-sm" onClick={() => setShowFilters(false)}>
-            <div className="w-full max-w-md bg-[#1A1A1A] rounded-t-3xl p-8 shadow-2xl border-t-4 border-[#EF4444] animate-slide-up" onClick={e => e.stopPropagation()}>
-              <div className="flex justify-between items-center mb-8">
-                <div className="text-3xl font-bold font-['Geist']">Фильтры</div>
-                <button onClick={() => setShowFilters(false)} className="text-[#A3A3A3] hover:text-white text-3xl transition-colors">×</button>
-              </div>
-              
-              <div className="space-y-8">
-                <div>
-                  <label className="block text-[#A3A3A3] mb-4 font-semibold text-lg">Категория</label>
-                  <div className="flex gap-3 flex-wrap">
-                    {categories.map((category) => (
-                      <button
-                        key={category.id}
-                        onClick={() => setSelectedCategory(category.id)}
-                        className={`px-6 py-3 rounded-xl font-bold whitespace-nowrap transition-all duration-300 ${
-                          selectedCategory === category.id
-                            ? "bg-[#EF4444] text-white shadow-md shadow-[#EF4444]/30"
-                            : "bg-[#2A2A2A] text-[#A3A3A3] border border-[#3A3A3A] hover:text-white"
-                        }`}
-                      >
-                        {category.name}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                
-                <div className="flex gap-4">
-                  <div className="flex-1">
-                    <label className="block text-[#A3A3A3] mb-3 font-semibold">Цена от</label>
-                    <input
-                      type="number"
-                      value={priceFrom}
-                      onChange={e => setPriceFrom(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl bg-[#2A2A2A] text-white border border-[#3A3A3A] focus:outline-none focus:ring-2 focus:ring-[#EF4444] transition-all duration-300"
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <label className="block text-[#A3A3A3] mb-3 font-semibold">до</label>
-                    <input
-                      type="number"
-                      value={priceTo}
-                      onChange={e => setPriceTo(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl bg-[#2A2A2A] text-white border border-[#3A3A3A] focus:outline-none focus:ring-2 focus:ring-[#EF4444] transition-all duration-300"
-                    />
-                  </div>
-                </div>
-                
-                <div>
-                  <label className="inline-flex items-center gap-4 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={inStock}
-                      onChange={() => setInStock(v => !v)}
-                      className="accent-[#EF4444] w-6 h-6"
-                    />
-                    <span className="text-[#A3A3A3] font-semibold text-lg">Только в наличии</span>
-                  </label>
-                </div>
-                
-                <button
-                  onClick={() => setShowFilters(false)}
-                  className="w-full bg-[#EF4444] text-white py-5 rounded-2xl font-bold hover:bg-[#DC2626] transition-all duration-300 shadow-lg shadow-[#EF4444]/40 text-xl"
-                >
-                  Применить
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
+        {/* Filters Modal скрыт для общего доступа */}
       </div>
     </div>
   );
