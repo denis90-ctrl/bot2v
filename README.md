@@ -1,70 +1,192 @@
-# Getting Started with Create React App
+# Telegram Bot Admin Interface
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Веб-интерфейс для администрирования Telegram-бота с возможностью просмотра и ответа на сообщения пользователей.
 
-## Available Scripts
+## 🚀 Возможности
 
-In the project directory, you can run:
+- **Список пользователей** - просмотр всех пользователей, которые писали боту
+- **Чат в реальном времени** - просмотр переписки с каждым пользователем
+- **Отправка сообщений** - ответ пользователям от имени бота
+- **Поддержка Markdown** - форматирование сообщений
+- **Автообновление** - автоматическое обновление списка пользователей и сообщений
+- **Темная тема** - современный темный интерфейс
 
-### `npm start`
+## 📋 Требования
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Node.js >= 16.0.0
+- MongoDB
+- Telegram Bot Token
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠 Установка
 
-### `npm test`
+1. **Клонируйте репозиторий:**
+```bash
+git clone <repository-url>
+cd telegram-bot-admin
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. **Установите зависимости:**
+```bash
+npm run install:all
+```
 
-### `npm run build`
+3. **Настройте переменные окружения:**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Создайте файл `backend/config.env`:
+```env
+MONGODB_URI=mongodb://localhost:27017/telegram-bot-admin
+TELEGRAM_BOT_TOKEN=your_bot_token_here
+ADMIN_CHAT_ID=your_admin_chat_id_here
+ADMIN_API_KEY=your_admin_api_key_here
+PORT=3001
+WEBHOOK_URL=https://your-domain.com/api/webhook
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Создайте файл `admin/.env`:
+```env
+REACT_APP_API_URL=http://localhost:3001/api
+REACT_APP_ADMIN_API_KEY=your_admin_api_key_here
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. **Запустите MongoDB:**
+```bash
+# Локально
+mongod
 
-### `npm run eject`
+# Или используйте MongoDB Atlas
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🚀 Запуск
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Разработка
+```bash
+# Запуск бэкенда и фронтенда одновременно
+npm run dev
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# Или по отдельности:
+npm run dev:backend  # Бэкенд на порту 3001
+npm run dev:admin    # Фронтенд на порту 3000
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Продакшн
+```bash
+# Сборка фронтенда
+npm run build:admin
 
-## Learn More
+# Запуск бэкенда
+npm run start:backend
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🔧 Настройка Webhook
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. **Настройте домен и SSL сертификат** (обязательно для webhook)
 
-### Code Splitting
+2. **Обновите WEBHOOK_URL в config.env:**
+```env
+WEBHOOK_URL=https://your-domain.com/api/webhook
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+3. **Установите webhook:**
+```bash
+npm run setup-webhook
+```
 
-### Analyzing the Bundle Size
+## 📁 Структура проекта
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
+telegram-bot-admin/
+├── backend/                 # Бэкенд (Node.js + Express)
+│   ├── models/             # MongoDB модели
+│   ├── routes/             # API роуты
+│   ├── services/           # Бизнес-логика
+│   ├── server.js           # Основной сервер
+│   └── config.env          # Конфигурация
+├── admin/                  # Фронтенд (React)
+│   ├── src/
+│   │   ├── components/     # React компоненты
+│   │   ├── services/       # API сервисы
+│   │   └── App.jsx         # Главный компонент
+│   └── public/             # Статические файлы
+├── scripts/                # Вспомогательные скрипты
+└── package.json            # Управление проектом
+```
 
-### Making a Progressive Web App
+## 🔌 API Endpoints
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Пользователи
+- `GET /api/users` - Список всех пользователей
+- `GET /api/user/:telegramId` - Информация о пользователе
 
-### Advanced Configuration
+### Сообщения
+- `GET /api/messages/:telegramId` - Сообщения пользователя
+- `POST /api/send-message` - Отправка сообщения
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Webhook
+- `POST /api/webhook` - Получение сообщений от Telegram
 
-### Deployment
+## 🎨 Интерфейс
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Основные компоненты:
+- **UserList** - Список пользователей с информацией о последнем сообщении
+- **ChatWindow** - Окно чата с историей сообщений и формой отправки
+- **App** - Главный компонент с управлением состоянием
 
-### `npm run build` fails to minify
+### Особенности:
+- Автоматическая прокрутка к новым сообщениям
+- Поддержка Markdown в сообщениях
+- Индикатор онлайн/оффлайн статуса
+- Обработка ошибок с уведомлениями
+- Адаптивный дизайн
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🔒 Безопасность
+
+- Валидация входящих данных
+- Обработка ошибок API
+- CORS настройки
+- Проверка подключения к серверу
+
+## 🚀 Развертывание
+
+### Локально:
+1. Установите MongoDB
+2. Настройте переменные окружения
+3. Запустите `npm run dev`
+
+### На сервере:
+1. Настройте домен с SSL
+2. Обновите WEBHOOK_URL
+3. Запустите бэкенд: `npm run start:backend`
+4. Разверните фронтенд: `npm run build:admin`
+
+## 📝 Логирование
+
+Бэкенд логирует:
+- Подключение к MongoDB
+- Входящие сообщения
+- Ошибки API
+- Статус webhook
+
+## 🔧 Отладка
+
+### Проверка подключения:
+```bash
+curl http://localhost:3001/health
+```
+
+### Проверка webhook:
+```bash
+curl -X POST http://localhost:3001/api/webhook \
+  -H "Content-Type: application/json" \
+  -d '{"message":{"from":{"id":123,"username":"test"},"text":"test"}}'
+```
+
+## 🤝 Вклад в проект
+
+1. Fork репозиторий
+2. Создайте feature branch
+3. Внесите изменения
+4. Создайте Pull Request
+
+## 📄 Лицензия
+
+MIT License

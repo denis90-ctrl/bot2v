@@ -10,6 +10,7 @@ const products = [
     category: 'Одежда',
     price: 500,
     image: tshirtIcon,
+    stock: 5,
   },
   {
     id: 2,
@@ -17,6 +18,7 @@ const products = [
     category: 'Электроника',
     price: 1200,
     image: headphonesIcon,
+    stock: 0,
   },
   {
     id: 3,
@@ -24,6 +26,7 @@ const products = [
     category: 'Аксессуары',
     price: 300,
     image: braceletIcon,
+    stock: 3,
   },
   {
     id: 4,
@@ -31,6 +34,7 @@ const products = [
     category: 'Одежда',
     price: 2500,
     image: jacketIcon,
+    stock: 2,
   },
 ];
 
