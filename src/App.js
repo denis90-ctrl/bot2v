@@ -183,6 +183,8 @@ function CatalogPage({ onPageChange }) {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [search, setSearch] = useState("");
   const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(false);
+  const [countdown, setCountdown] = useState(5);
   const [showFilters, setShowFilters] = useState(false);
   const [priceFrom, setPriceFrom] = useState("");
   const [priceTo, setPriceTo] = useState("");
@@ -205,6 +207,23 @@ function CatalogPage({ onPageChange }) {
       return true;
     });
   }, [selectedCategory, search, priceFrom, priceTo, inStock]);
+
+  React.useEffect(() => {
+    if (!showOverlay) return;
+    setCountdown(5);
+    const timer = setInterval(() => {
+      setCountdown((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          setShowOverlay(false);
+          onPageChange("catalog");
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [showOverlay, onPageChange]);
 
   return (
     <div className="min-h-screen bg-[#0D0D0D] text-white pb-24">
@@ -238,10 +257,13 @@ function CatalogPage({ onPageChange }) {
 
           <div className="mb-8 flex justify-center">
             <button
-              onClick={() => setSelectedCategory("info")}
+              onClick={() => {
+                setSelectedCategory("info");
+                setShowOverlay(true);
+              }}
               className="bg-[#EF4444] text-white py-3 px-6 rounded-2xl font-bold hover:bg-[#DC2626] transition-all duration-300 shadow-lg shadow-[#EF4444]/40 text-base"
             >
-              Получить доступ к видео
+              Получить эксклюзивный доступ
             </button>
           </div>
 
@@ -260,6 +282,17 @@ function CatalogPage({ onPageChange }) {
             </div>
           </div>
         </div>
+
+        {showOverlay && (
+          <div className="fixed inset-0 z-[100] bg-black text-white flex items-center justify-center">
+            <div className="px-8 text-center max-w-md">
+              <div className="text-lg font-semibold mb-6">
+                муха делает около 1000 взмахов за 5 секунд, как ты думаешь - много ли ты успел за прошедшую жизнь?
+              </div>
+              <div className="text-4xl font-bold">{countdown}</div>
+            </div>
+          </div>
+        )}
 
         {/* Categories скрыты для общего доступа */}
 
