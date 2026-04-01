@@ -138,6 +138,7 @@ function CheckoutPage({ onPageChange }) {
   const notifyOrder = async () => {
     try {
       const user = window.Telegram?.WebApp?.initDataUnsafe?.user;
+      const initData = window.Telegram?.WebApp?.initData;
       const payload = {
         user: {
           id: user?.id || '—',
@@ -150,7 +151,8 @@ function CheckoutPage({ onPageChange }) {
           price: item.price,
           quantity: 1
         })),
-        total: totalSum
+        total: totalSum,
+        initData
       };
 
       const apiBase = process.env.REACT_APP_API_BASE_URL || '';

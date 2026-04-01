@@ -343,7 +343,7 @@ router.get('/user/:telegramId', async (req, res) => {
 
 // Редактирование сообщения
 // Уведомление о заказе администратору
-router.post('/notify-order', async (req, res) => {
+router.post('/notify-order', requireTelegramAuth, async (req, res) => {
   try {
     const { user, items, total } = req.body || {};
 
