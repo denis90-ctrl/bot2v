@@ -135,6 +135,34 @@ function CheckoutPage({ onPageChange }) {
   const { cartItems, clearCart } = useCart();
   const totalSum = useMemo(() => cartItems.reduce((sum, item) => sum + item.price, 0), [cartItems]);
 
+  const notifyOrder = async () => {
+    try {
+      const user = window.Telegram?.WebApp?.initDataUnsafe?.user;
+      const payload = {
+        user: {
+          id: user?.id || '—',
+          username: user?.username || '',
+          name: `${user?.first_name || ''} ${user?.last_name || ''}`.trim() || '—'
+        },
+        items: cartItems.map((item) => ({
+          id: item.id,
+          name: item.name,
+          price: item.price,
+          quantity: 1
+        })),
+        total: totalSum
+      };
+
+      const apiBase = process.env.REACT_APP_API_BASE_URL || '';
+      await fetch(`${apiBase}/api/notify-order`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } catch (error) {
+      console.error('Ошибка уведомления о заказе:', error);
+    }
+  };
   const handleSubmit = () => {
     if (!cartItems.length) {
       if (window.Telegram?.WebApp?.showAlert) {
@@ -144,7 +172,7 @@ function CheckoutPage({ onPageChange }) {
       }
       return;
     }
-    clearCart();
+    notifyOrder();\r\n    clearCart();
     if (window.Telegram?.WebApp?.showAlert) {
       window.Telegram.WebApp.showAlert("Заказ оформлен! Мы свяжемся с вами.");
     } else {
@@ -605,4 +633,5 @@ const products = [
 ];
 
 export default App;
+
 
