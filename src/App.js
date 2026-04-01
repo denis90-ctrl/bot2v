@@ -247,12 +247,16 @@ function CatalogPage({ onPageChange }) {
 
           <div className="mb-10">
             <div className="rounded-2xl overflow-hidden border border-[#2A2A2A] shadow-lg shadow-black/40 bg-[#1A1A1A]">
-              <video
-                src="/intro.mp4"
-                controls
-                preload="metadata"
-                className="w-full h-auto"
-              />
+              <div className="w-full aspect-video">
+                <iframe
+                  title="Intro Video"
+                  src="https://www.youtube.com/embed/tS1gyNLZGrQ"
+                  className="w-full h-full"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
             </div>
           </div>
         </div>
