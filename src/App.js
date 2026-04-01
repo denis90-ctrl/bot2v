@@ -174,7 +174,8 @@ function CheckoutPage({ onPageChange }) {
       }
       return;
     }
-    notifyOrder();\r\n    clearCart();
+    notifyOrder();
+    clearCart();
     if (window.Telegram?.WebApp?.showAlert) {
       window.Telegram.WebApp.showAlert("Заказ оформлен! Мы свяжемся с вами.");
     } else {
