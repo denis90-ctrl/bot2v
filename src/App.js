@@ -185,6 +185,7 @@ function CatalogPage({ onPageChange }) {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
   const [countdown, setCountdown] = useState(5);
+  const [activeTab, setActiveTab] = useState("sport");
   const [showFilters, setShowFilters] = useState(false);
   const [priceFrom, setPriceFrom] = useState("");
   const [priceTo, setPriceTo] = useState("");
@@ -207,6 +208,21 @@ function CatalogPage({ onPageChange }) {
       return true;
     });
   }, [selectedCategory, search, priceFrom, priceTo, inStock]);
+
+  const lessons = useMemo(() => ([
+    {
+      id: "TpDQjjPUaiI",
+      title: "Lesson 1"
+    },
+    {
+      id: "yr0J3_4paC4",
+      title: "Lesson 2"
+    },
+    {
+      id: "yVaBd26Zwx0",
+      title: "Lesson 3"
+    }
+  ]), []);
 
   React.useEffect(() => {
     if (!showOverlay) return;
@@ -281,6 +297,22 @@ function CatalogPage({ onPageChange }) {
               </div>
             </div>
           </div>
+
+          <div className="mb-8 flex justify-center gap-3">
+            {["sport", "history", "lessons"].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-5 py-2 rounded-2xl font-bold transition-all duration-300 text-sm ${
+                  activeTab === tab
+                    ? "bg-[#EF4444] text-white shadow-lg shadow-[#EF4444]/40"
+                    : "bg-[#1A1A1A] text-[#A3A3A3] border border-[#2A2A2A] hover:text-white hover:bg-[#2A2A2A]"
+                }`}
+              >
+                {tab === "sport" ? "Sport" : tab === "history" ? "History" : "Lessons"}
+              </button>
+            ))}
+          </div>
         </div>
 
         {showOverlay && (
@@ -296,12 +328,38 @@ function CatalogPage({ onPageChange }) {
 
         {/* Categories скрыты для общего доступа */}
 
-        {/* Products Grid */}
-        <div className="grid grid-cols-2 gap-4">
-          {filteredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} onAddToCart={addToCart} />
-          ))}
-        </div>
+        {activeTab === "sport" && (
+          <div className="grid grid-cols-2 gap-4">
+            {filteredProducts.map((product) => (
+              <ProductCard key={product.id} product={product} onAddToCart={addToCart} />
+            ))}
+          </div>
+        )}
+
+        {activeTab === "history" && (
+          <div className="bg-[#1A1A1A] rounded-2xl shadow-lg p-6 border border-[#2A2A2A] text-[#A3A3A3] text-base">
+            Скоро...
+          </div>
+        )}
+
+        {activeTab === "lessons" && (
+          <div className="space-y-4">
+            {lessons.map((lesson) => (
+              <div key={lesson.id} className="rounded-2xl overflow-hidden border border-[#2A2A2A] shadow-lg shadow-black/40 bg-[#1A1A1A]">
+                <div className="w-full aspect-video">
+                  <iframe
+                    title={lesson.title}
+                    src={`https://www.youtube.com/embed/${lesson.id}`}
+                    className="w-full h-full"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Filters Modal скрыт для общего доступа */}
       </div>
