@@ -156,13 +156,26 @@ function CheckoutPage({ onPageChange }) {
       };
 
       const apiBase = process.env.REACT_APP_API_BASE_URL || '';
-      await fetch(`${apiBase}/api/notify-order`, {
+      const response = await fetch(`${apiBase}/api/notify-order`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
+      const responseText = await response.text();
+      const message = `notify-order: ${response.status} ${response.statusText || ''}\n${responseText || ''}`;
+      if (window.Telegram?.WebApp?.showAlert) {
+        window.Telegram.WebApp.showAlert(message);
+      } else {
+        alert(message);
+      }
     } catch (error) {
       console.error('Ошибка уведомления о заказе:', error);
+      const message = `notify-order failed: ${error?.message || error}`;
+      if (window.Telegram?.WebApp?.showAlert) {
+        window.Telegram.WebApp.showAlert(message);
+      } else {
+        alert(message);
+      }
     }
   };
   const handleSubmit = () => {
