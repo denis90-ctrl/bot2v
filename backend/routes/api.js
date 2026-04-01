@@ -87,12 +87,16 @@ const requireTelegramAuth = (req, res, next) => {
     return res.status(401).json({ error: 'initData недействителен' });
   }
 
+  req.telegramUserId = result.userId || null;
+  return next();
+};
+
+// Проверка прав администратора (используем для админ-роутов)
+const requireAdmin = (req, res, next) => {
   const adminId = process.env.ADMIN_CHAT_ID;
-  if (adminId && result.userId && result.userId !== String(adminId)) {
+  if (adminId && req.telegramUserId && req.telegramUserId !== String(adminId)) {
     return res.status(403).json({ error: 'Недостаточно прав' });
   }
-
-  req.telegramUserId = result.userId || null;
   return next();
 };
 
@@ -278,7 +282,7 @@ router.get('/messages/:telegramId/stats', cacheMiddleware(2 * 60 * 1000), async 
 });
 
 // Отправка сообщения пользователю
-router.post('/send-message', requireTelegramAuth, async (req, res) => {
+router.post('/send-message', requireTelegramAuth, requireAdmin, async (req, res) => {
   try {
     const { telegramId, text } = req.body;
     
@@ -300,7 +304,7 @@ router.post('/send-message', requireTelegramAuth, async (req, res) => {
 });
 
 // Отправка файла пользователю
-router.post('/send-file', requireTelegramAuth, upload.single('file'), async (req, res) => {
+router.post('/send-file', requireTelegramAuth, requireAdmin, upload.single('file'), async (req, res) => {
   try {
     const { telegramId, caption } = req.body;
     const file = req.file;
