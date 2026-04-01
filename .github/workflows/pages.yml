@@ -35,6 +35,7 @@ jobs:
         run: npm run build
         env:
           CI: false
+          REACT_APP_API_BASE_URL: ${{ secrets.REACT_APP_API_BASE_URL }}
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
