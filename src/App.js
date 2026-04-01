@@ -274,7 +274,6 @@ function CatalogPage({ onPageChange }) {
           <div className="mb-8 flex justify-center">
             <button
               onClick={() => {
-                setSelectedCategory("info");
                 setShowOverlay(true);
               }}
               className="bg-[#EF4444] text-white py-3 px-6 rounded-2xl font-bold hover:bg-[#DC2626] transition-all duration-300 shadow-lg shadow-[#EF4444]/40 text-base"
@@ -299,11 +298,11 @@ function CatalogPage({ onPageChange }) {
           </div>
 
           <div className="mb-8 flex justify-center gap-3">
-            {["sport", "history", "lessons"].map((tab) => (
+            {["sport", "lessons", "history"].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-5 py-2 rounded-2xl font-bold transition-all duration-300 text-sm ${
+                className={`px-6 py-2.5 rounded-2xl font-bold transition-all duration-300 text-base ${
                   activeTab === tab
                     ? "bg-[#EF4444] text-white shadow-lg shadow-[#EF4444]/40"
                     : "bg-[#1A1A1A] text-[#A3A3A3] border border-[#2A2A2A] hover:text-white hover:bg-[#2A2A2A]"
@@ -570,41 +569,34 @@ const products = [
   },
   {
     id: 2,
-    name: "Подписка 3 месяца",
-    price: null,
-    category: "info",
-    image: require("./assets/bracelet.png"),
-  },
-  {
-    id: 3,
     name: "Подписка 12 месяцев",
     price: null,
     category: "info",
     image: require("./assets/jacket.png"),
   },
   {
-    id: 4,
+    id: 3,
     name: "Шорты",
     price: null,
     category: "physical",
     image: require("./assets/tshirt.png"),
   },
   {
-    id: 5,
+    id: 4,
     name: "Рашгард",
     price: null,
     category: "physical",
     image: require("./assets/headphones.png"),
   },
   {
-    id: 6,
+    id: 5,
     name: "Леггинсы",
     price: null,
     category: "physical",
     image: require("./assets/bracelet.png"),
   },
   {
-    id: 7,
+    id: 6,
     name: "Полный комплект",
     price: null,
     category: "physical",
