@@ -406,6 +406,10 @@ function ProfilePage() {
             <div className="text-[#A3A3A3] text-lg">Пока нет заказов</div>
           </div>
         </div>
+
+        <div className="mt-10 text-center text-sm text-[#6B6B6B]">
+          Property of Denis D. jointly with Sulim A.
+        </div>
       </div>
     </div>
   );
