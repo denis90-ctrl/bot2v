@@ -244,6 +244,17 @@ function CatalogPage({ onPageChange }) {
               Получить доступ к видео
             </button>
           </div>
+
+          <div className="mb-10">
+            <div className="rounded-2xl overflow-hidden border border-[#2A2A2A] shadow-lg shadow-black/40 bg-[#1A1A1A]">
+              <video
+                src="/intro.mov"
+                controls
+                preload="metadata"
+                className="w-full h-auto"
+              />
+            </div>
+          </div>
         </div>
 
         {/* Categories скрыты для общего доступа */}
