@@ -135,10 +135,26 @@ function CheckoutPage({ onPageChange }) {
   const { cartItems, clearCart } = useCart();
   const totalSum = useMemo(() => cartItems.reduce((sum, item) => sum + item.price, 0), [cartItems]);
 
+  const showNotice = (message) => {
+    try {
+      if (window.Telegram?.WebApp?.showAlert) {
+        window.Telegram.WebApp.showAlert(message);
+        return;
+      }
+    } catch (error) {
+      // fallback to browser alert below
+    }
+    alert(message);
+  };
+
   const notifyOrder = async () => {
     try {
       const user = window.Telegram?.WebApp?.initDataUnsafe?.user;
       const initData = window.Telegram?.WebApp?.initData;
+      if (!initData) {
+        showNotice("Оформление доступно только внутри Telegram.");
+        return;
+      }
       const payload = {
         user: {
           id: user?.id || '—',
@@ -162,38 +178,24 @@ function CheckoutPage({ onPageChange }) {
         body: JSON.stringify(payload)
       });
       const responseText = await response.text();
-      const message = `notify-order: ${response.status} ${response.statusText || ''}\n${responseText || ''}`;
-      if (window.Telegram?.WebApp?.showAlert) {
-        window.Telegram.WebApp.showAlert(message);
-      } else {
-        alert(message);
+      if (!response.ok) {
+        const message = `notify-order: ${response.status} ${response.statusText || ''}\n${responseText || ''}`;
+        showNotice(message);
       }
     } catch (error) {
       console.error('Ошибка уведомления о заказе:', error);
       const message = `notify-order failed: ${error?.message || error}`;
-      if (window.Telegram?.WebApp?.showAlert) {
-        window.Telegram.WebApp.showAlert(message);
-      } else {
-        alert(message);
-      }
+      showNotice(message);
     }
   };
   const handleSubmit = () => {
     if (!cartItems.length) {
-      if (window.Telegram?.WebApp?.showAlert) {
-        window.Telegram.WebApp.showAlert("Корзина пуста");
-      } else {
-        alert("Корзина пуста");
-      }
+      showNotice("Корзина пуста");
       return;
     }
     notifyOrder();
     clearCart();
-    if (window.Telegram?.WebApp?.showAlert) {
-      window.Telegram.WebApp.showAlert("Заказ оформлен! Мы свяжемся с вами.");
-    } else {
-      alert("Заказ оформлен! Мы свяжемся с вами.");
-    }
+    showNotice("Заказ оформлен! Мы свяжемся с вами.");
     onPageChange("catalog");
   };
 
