@@ -84,7 +84,7 @@ const requireTelegramAuth = (req, res, next) => {
 
   const result = verifyInitData(initData, process.env.TELEGRAM_BOT_TOKEN);
   if (!result.ok) {
-    return res.status(401).json({ error: 'initData недействителен' });
+    return res.status(401).json({ error: 'initData недействителен', reason: result.error });
   }
 
   req.telegramUserId = result.userId || null;
